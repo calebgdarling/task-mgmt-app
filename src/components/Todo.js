@@ -64,11 +64,10 @@ function Todo(props) {
         </button>
         <button
           type="button"
-          className="btn todo-cancel"
-          onClick={() => setEditing(false)}
+          className="btn btn__danger"
+          onClick={() => props.deleteTask(props.id)}
         >
-          Cancel
-          <span className="visually-hidden">renaming {props.name}</span>
+          Delete <span className="visually-hidden">{props.name}</span>
         </button>
       </div>
     </div>
