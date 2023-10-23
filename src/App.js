@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Form from "./components/Form";
-import FilterButton from "./components/FilterButton";
+// import FilterButton from "./components/FilterButton";
 import Todo from "./components/Todo";
 import { nanoid } from "nanoid";
 
@@ -13,6 +13,19 @@ function App(props) {
     const newTask = { id: `todo-${nanoid()}`, name, completed: false };
     setTasks([...tasks, newTask]);
   }
+
+  function editTask(id, newName) {
+    const editedTaskList = tasks.map((task) => {
+      // if this task has the same ID as the edited task
+      if (id === task.id) {
+        //
+        return { ...task, name: newName };
+      }
+      return task;
+    });
+    setTasks(editedTaskList);
+  }
+  
 
   function toggleTaskCompleted(id) {
     const updatedTasks = tasks.map((task) => {
@@ -42,17 +55,18 @@ function App(props) {
       key={task.id}
       toggleTaskCompleted={toggleTaskCompleted}
       deleteTask={deleteTask}
+      editTask={editTask}
     />
   ));
   return (
     <div className="todoapp stack-large">
       <h1>TodoMatic</h1>
       <Form addTask={addTask} />
-      <div className="filters btn-group stack-exception">
+      {/* <div className="filters btn-group stack-exception">
         <FilterButton />
         <FilterButton />
         <FilterButton />
-      </div>
+      </div> */}
       {/* <h2 id="list-heading">3 tasks remaining</h2> */}
       <ul className="todo-list stack-large stack-exception">
         {taskList}
